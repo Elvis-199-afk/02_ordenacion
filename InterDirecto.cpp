@@ -2,7 +2,7 @@
 using namespace std;
 
 void interDirDer(int[],int);
-
+void interDirIzq(int[],int);
 
 
 int main(){
@@ -22,6 +22,7 @@ int main(){
 		system("cls");
 		cout<<"\t\t=== ORDENACION ===\n\n";
 		cout<<"1. Intercambio directo por derecha.\n";
+		cout<<"2. Intercambio directo por izquierda.\n";
 		cout<<"0. SALIR\n";
 		cout<<"Elige una de las opciones: ";
 		cin>>op;
@@ -29,6 +30,11 @@ int main(){
 			case 1:
 				system("cls");
 				interDirDer(arr,n);
+				system("pause");
+				break;
+			case 2:
+				system("cls");
+				interDirIzq(arr,n);
 				system("pause");
 				break;
 			case 0:
@@ -49,6 +55,23 @@ void interDirDer(int arr[],int n){
 			if(arr[j]<arr[j-1]){
 				int aux=arr[j-1];				
 				arr[j-1]=arr[j];
+				arr[j]=aux;
+			}
+		}
+	}
+	cout<<"Los datos ingresados ordenados por la derecha es: \n\n";
+	for(int i=0;i<n;i++){
+		cout<<arr[i]<<" ";
+	}
+	cout<<endl;
+}
+
+void interDirIzq(int arr[],int n){
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n-1;j++){
+			if(arr[j]>arr[j+1]){
+				int aux=arr[j+1];				
+				arr[j+1]=arr[j];
 				arr[j]=aux;
 			}
 		}

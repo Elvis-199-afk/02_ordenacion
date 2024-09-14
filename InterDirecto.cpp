@@ -4,7 +4,7 @@ using namespace std;
 void interDirDer(int[],int);
 void interDirIzq(int[],int);
 void interDirCen(int[],int);
-
+void interDirBi(int[],int);
 int main(){
 	int n,op;
 	cout<<"Ingrese cuantos datos desea: ";
@@ -24,6 +24,7 @@ int main(){
 		cout<<"1. Intercambio directo por derecha.\n";
 		cout<<"2. Intercambio directo por izquierda.\n";
 		cout<<"3. Intercambio directo por señal.\n";
+		cout<<"4. Intercambio directo por bidireccion\n";
 		cout<<"0. SALIR\n";
 		cout<<"Elige una de las opciones: ";
 		cin>>op;
@@ -41,6 +42,11 @@ int main(){
 			case 3:
 				system("cls");
 				interDirCen(arr,n);
+				system("pause");
+				break;
+			case 4:
+				system("cls");
+				interDirBi(arr,n);
 				system("pause");
 				break;
 			case 0:
@@ -82,7 +88,7 @@ void interDirIzq(int arr[],int n){
 			}
 		}
 	}
-	cout<<"Los datos ingresados ordenados por la derecha es: \n\n";
+	cout<<"Los datos ingresados ordenados por la izquierda es: \n\n";
 	for(int i=0;i<n;i++){
 		cout<<arr[i]<<" ";
 	}
@@ -105,6 +111,35 @@ void interDirCen(int arr[],int n){
 		i++;
 	}
 	cout<<"Los datos ingresados ordenados con señal es: \n\n";
+	for(int i=0;i<n;i++){
+		cout<<arr[i]<<" ";
+	}
+	cout<<endl;
+}
+
+void interDirBi(int arr[],int n){
+	int izq=0,der=n-1,k=n-1;
+	while(izq<=der){
+		for(int i=der;i>izq;i--){
+			if(arr[i-1]>arr[i]){
+				int aux=arr[i-1];
+				arr[i-1]=arr[i];
+				arr[i]=aux;
+				k=i;
+			}
+		}
+		izq=k+1;
+		for(int i=izq;i<der;i++){
+			if(arr[i]>arr[i+1]){
+				int aux=arr[i];
+				arr[i]=arr[i+1];
+				arr[i+1]=aux;
+				k=i;
+			}
+		}
+		der=k;	
+	}
+	cout<<"Los datos ingresados ordenados bidireccionalmente es: \n\n";
 	for(int i=0;i<n;i++){
 		cout<<arr[i]<<" ";
 	}

@@ -1,11 +1,15 @@
 #include<iostream>
+#include<windows.h> //para mostrar 'ñ'
 using namespace std;
 
 void interDirDer(int[],int);
 void interDirIzq(int[],int);
 void interDirCen(int[],int);
 void interDirBi(int[],int);
+void mostrar(int[],int);
+void insertar(int[],int&);
 int main(){
+	SetConsoleOutputCP(CP_UTF8); //para mostrar la 'ñ'
 	int n,op;
 	cout<<"Ingrese cuantos datos desea: ";
 	cin>>n;
@@ -25,6 +29,8 @@ int main(){
 		cout<<"2. Intercambio directo por izquierda.\n";
 		cout<<"3. Intercambio directo por señal.\n";
 		cout<<"4. Intercambio directo por bidireccion\n";
+		cout<<"5. Mostrar los datos ingresados (sin ordenar)\n";
+		cout<<"6. Ingresar nuevamente los datos\n";
 		cout<<"0. SALIR\n";
 		cout<<"Elige una de las opciones: ";
 		cin>>op;
@@ -49,6 +55,16 @@ int main(){
 				interDirBi(arr,n);
 				system("pause");
 				break;
+			case 5:
+				system("cls");
+				mostrar(arr,n);
+				system("pause");
+				break;
+			case 6:
+				system("cls");
+				insertar(arr,n);
+				system("pause");
+				break;
 			case 0:
 				cout<<"\nSALIENDO ...\n";
 				break;
@@ -61,9 +77,13 @@ int main(){
 	return 0;
 }
 
-void interDirDer(int arr[],int n){
+void interDirDer(int arreglo[],int n){
+	int arr[50];
 	for(int i=0;i<n;i++){
-		for(int j=n-1;j>=0;j--){
+		arr[i]=arreglo[i];
+	}
+	for(int i=0;i<n;i++){
+		for(int j=n-1;j>0;j--){
 			if(arr[j]<arr[j-1]){
 				int aux=arr[j-1];				
 				arr[j-1]=arr[j];
@@ -78,7 +98,11 @@ void interDirDer(int arr[],int n){
 	cout<<endl;
 }
 
-void interDirIzq(int arr[],int n){
+void interDirIzq(int arreglo[],int n){
+	int arr[50];
+	for(int i=0;i<n;i++){
+		arr[i]=arreglo[i];
+	}
 	for(int i=0;i<n;i++){
 		for(int j=0;j<n-1;j++){
 			if(arr[j]>arr[j+1]){
@@ -95,12 +119,16 @@ void interDirIzq(int arr[],int n){
 	cout<<endl;
 }
 
-void interDirCen(int arr[],int n){
+void interDirCen(int arreglo[],int n){
+	int arr[50];
+	for(int i=0;i<n;i++){
+		arr[i]=arreglo[i];
+	}
 	bool cen=true;
 	int i=0;
-	while(i<=n-1&&cen){
+	while(i<n-1&&cen){
 		cen=false;
-		for(int j=0;j<n-i;j++){
+		for(int j=0;j<n-1-i;j++){
 			if(arr[j]>arr[j+1]){
 				int aux=arr[j];
 				arr[j]=arr[j+1];
@@ -117,9 +145,14 @@ void interDirCen(int arr[],int n){
 	cout<<endl;
 }
 
-void interDirBi(int arr[],int n){
-	int izq=0,der=n-1,k=n-1;
-	while(izq<=der){
+void interDirBi(int arreglo[],int n){
+	int arr[50];
+	for(int i=0;i<n;i++){
+		arr[i]=arreglo[i];
+	}
+	
+	int izq=0,der=n-1,k=0;
+	while(izq<der){
 		for(int i=der;i>izq;i--){
 			if(arr[i-1]>arr[i]){
 				int aux=arr[i-1];
@@ -128,7 +161,7 @@ void interDirBi(int arr[],int n){
 				k=i;
 			}
 		}
-		izq=k+1;
+		izq=k;
 		for(int i=izq;i<der;i++){
 			if(arr[i]>arr[i+1]){
 				int aux=arr[i];
@@ -146,4 +179,19 @@ void interDirBi(int arr[],int n){
 	cout<<endl;
 }
 
-	
+void mostrar(int arr[],int n){
+	for(int i=0;i<n;i++){
+		cout<<arr[i]<<" ";
+	}
+	cout<<endl;
+}
+
+void insertar(int arr[],int &n){
+	cout<<"Ingrese cuantos datos desea: ";
+	cin>>n;
+	cout<<"\nIngrese los datos\n";
+	for(int i=0;i<n;i++){
+		cout<<i+1<<". ";
+		cin>>arr[i];
+	}
+}

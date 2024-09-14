@@ -3,7 +3,7 @@ using namespace std;
 
 void interDirDer(int[],int);
 void interDirIzq(int[],int);
-
+void interDirCen(int[],int);
 
 int main(){
 	int n,op;
@@ -23,6 +23,7 @@ int main(){
 		cout<<"\t\t=== ORDENACION ===\n\n";
 		cout<<"1. Intercambio directo por derecha.\n";
 		cout<<"2. Intercambio directo por izquierda.\n";
+		cout<<"3. Intercambio directo por señal.\n";
 		cout<<"0. SALIR\n";
 		cout<<"Elige una de las opciones: ";
 		cin>>op;
@@ -37,11 +38,17 @@ int main(){
 				interDirIzq(arr,n);
 				system("pause");
 				break;
+			case 3:
+				system("cls");
+				interDirCen(arr,n);
+				system("pause");
+				break;
 			case 0:
 				cout<<"\nSALIENDO ...\n";
 				break;
 			default:
 				cout<<"Ingrese una de las opciones.\n";
+				system("pause");
 				break;
 		}
 	}while(op!=0);
@@ -49,7 +56,6 @@ int main(){
 }
 
 void interDirDer(int arr[],int n){
-	
 	for(int i=0;i<n;i++){
 		for(int j=n-1;j>=0;j--){
 			if(arr[j]<arr[j-1]){
@@ -83,5 +89,26 @@ void interDirIzq(int arr[],int n){
 	cout<<endl;
 }
 
-	
+void interDirCen(int arr[],int n){
+	bool cen=true;
+	int i=0;
+	while(i<=n-1&&cen){
+		cen=false;
+		for(int j=0;j<n-i;j++){
+			if(arr[j]>arr[j+1]){
+				int aux=arr[j];
+				arr[j]=arr[j+1];
+				arr[j+1]=aux;
+				cen=true;
+			}
+		}
+		i++;
+	}
+	cout<<"Los datos ingresados ordenados con señal es: \n\n";
+	for(int i=0;i<n;i++){
+		cout<<arr[i]<<" ";
+	}
+	cout<<endl;
+}
+
 	
